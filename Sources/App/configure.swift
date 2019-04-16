@@ -26,6 +26,7 @@ public func configure(_ config: inout Config, _ env: inout Environment, _ servic
     services.register(databases)
 
     // Configure migrations
+    //git
     var migrations = MigrationConfig()
     migrations.add(model: Acronym.self, database: .sqlite)
     services.register(migrations)
