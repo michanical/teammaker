@@ -24,4 +24,13 @@ public func routes(_ router: Router) throws {
                 return acronym.save(on: req)
         }
     }
+    
+    router.post("definitions ") { req -> Future<Acronym> in
+        // 2
+        return try req.content.decode(Acronym.self)
+            .flatMap(to: Acronym.self) { acronym in
+                // 3
+                return acronym.save(on: req)
+        }
+    }
 }
