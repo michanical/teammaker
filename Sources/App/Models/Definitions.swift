@@ -6,47 +6,40 @@
 //
 
 import Vapor
-import FluentSQLite
 
-final class Definitions: Codable {
-    var id: Int?
-    var colors: DefinitionColor
+final class Definitions: Content {
+    var games: [Game]
     
-    init(colors: DefinitionColor) {
-        self.colors = colors
+    init() {
+        self.games = Games.allCases.map({Game(game: $0)})
     }
 }
 
-extension Definitions: SQLiteModel {}
 
-extension Definitions: Migration {}
-
-extension Definitions: Content {}
-
-final class DefinitionColors: Codable {
-    var id: Int?
-    var dota: DefinitionColor
-    
-    init(dota: DefinitionColor) {
-        self.dota = dota
-    }
-}
-
-final class DefinitionColor: Codable {
-    var id: Int?
-    var secondary: String
-    var secondaryDark: String
-    var secondaryLight: String
-    var primary: String
-    var primaryLight: String
-    var primaryDark: String
-    
-    init(secondary: String, secondaryDark: String, secondaryLight: String, primary: String, primaryLight: String, primaryDark: String) {
-        self.secondary = secondary
-        self.secondaryDark = secondaryDark
-        self.secondaryLight = secondaryLight
-        self.primary = primary
-        self.primaryLight = primaryLight
-        self.primaryDark = primaryDark
-    }
-}
+//final class DefinitionColors: Codable {
+//    var id: Int?
+//    var dota: DefinitionColor
+//
+//    init(dota: DefinitionColor) {
+//        self.dota = dota
+//    }
+//}
+//
+//final class DefinitionColor: Codable {
+//    var id: Int?
+//    var secondary: String
+//    var secondaryDark: String
+//    var secondaryLight: String
+//    var primary: String
+//    var primaryLight: String
+//    var primaryDark: String
+//
+//    init(secondary: String, secondaryDark: String, secondaryLight: String, primary: String, primaryLight: String, primaryDark: String) {
+//        self.secondary = secondary
+//        self.secondaryDark = secondaryDark
+//        self.secondaryLight = secondaryLight
+//        self.primary = primary
+//        self.primaryLight = primaryLight
+//        self.primaryDark = primaryDark
+//    }
+//}

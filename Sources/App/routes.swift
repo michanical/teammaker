@@ -8,8 +8,13 @@ public func routes(_ router: Router) throws {
     }
     
     // Basic "Hello, world!" example
-    router.get("hello") { req in
-        return "Hello, world!"
+    router.get("api","definitions") { req -> Definitions in
+        return Definitions()
+    }
+    
+    router.get("api","colors",Int.parameter) { req -> Colors in
+        let gameIndex = try req.parameters.next(Int.self)
+        return Colors(game: Games(rawValue: gameIndex) ?? Games.dota)
     }
     
     router.get("hello", "vapor") { req -> String in
@@ -25,7 +30,7 @@ public func routes(_ router: Router) throws {
         }
     }
     
-    router.post("definitions ") { req -> Future<Acronym> in
+    router.post("definitions") { req -> Future<Acronym> in
         // 2
         return try req.content.decode(Acronym.self)
             .flatMap(to: Acronym.self) { acronym in
